@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e -u -o pipefail
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
+
+python3 -m venv venv
+venv/bin/pip install wheel
+venv/bin/python setup.py bdist_wheel --universal
+venv/bin/pip install twine
+venv/bin/twine upload dist/*.whl
+rm -rf build dist inwxcli.egg-info venv
